@@ -1,0 +1,35 @@
+
+README File for Project 1 of CS 118
+
+High Level Design:
+I first start my webserver file by getting the TCP server socket connections right. This includes
+the socket(), bind(), listen(), and accept() function using the TA's skeleton code. After that, I used
+multiple different buffers to read and write from and to the HTTP protocol. I used a buffer to disect
+the HTTP GET into the GET method and the URL which is which file it wants. After that, I created multiple
+buffers for the response lines in the header buffers, content type buffer and content length buffer, and merged
+all of them together.
+
+Problems I faced:
+
+My first problem was definitely actually using C buffers again because I hadn't in a while and it was
+pretty confusing this time around. So, the idea of the offset for the buffer and calculating the length
+of each added buffer was kinda rough. I used strcat() in the beginning but gave me some SegFaults that
+I didn't know how to deal with so I went with old reliable strcpy() with having an offset to track
+the length of the buffer.
+
+Second problem I faced was tiny which was not having big enough buffer sizes to actually send through image files.
+
+Third problem I faced was that I would loop once through my while loop and it would give back enough info,
+but then the second request from the browser would give a segfault or a white screen. I realised after research
+that the problem was not having a memory reset, memset(), in the loop after each request coming back and I had it
+set up outside the loop initially.
+
+Other problems were nit-picky and small.
+
+
+ACKs:
+Random page online that gave me all content type, content length and GET responses format
+Man pages
+TA skeleton code
+Stack Overflow for C parsing, found very good examples
+https://stackoverflow.com/questions/32496497/standard-function-to-replace-character-or-substring-in-a-char-array/32496721
